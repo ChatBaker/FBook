@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @topic.content %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @topic.image %>
-</p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<div class="container">
+ <div  class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+  <p id="notice"><%= notice %></p>
+    <div id=main_article class="row">
+      <p class=article_content><%= @topic.content %></p>
+      <p class=article_image><%=  image_tag @topic.image_url %></p>
+      <section class=edit_destroy_glyphicon>
+      <%= link_to '', edit_topic_path(@topic), class: 'glyphicon glyphicon-edit'  %>
+      <%= link_to '', topics_path, class: 'glyphicon glyphicon-thumbs-down'  %>
+      </section>
+    </div>
+ </div>
+</div>

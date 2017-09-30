@@ -1,6 +1,7 @@
 // Place all the styles related to the topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// 以下、index.html.erb
 #main_article{
   border-style: solid;
   border-width: 1px;
@@ -9,21 +10,34 @@
 }
 .edit_destroy_glyphicon{
   float: right;
+  margin-right: 2px;
 }
-.article_content{
-  text-align:left;
-  display: block;
-  height: auto;
-  margin: 8px 15px 8px 15px;
-  max-width: 100%;
-
+// 以下、new.html.erb
+#new_article{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #DDDFE2;
+  background-color: white;
 }
-
-.article_image{
+.image_uploader{
+  float: right;
+  margin: 2px 5px 0px 0px;
+}
+.new_content{
+text-align:center;
+display: block;
+height: auto;
+margin: 8px 8px 8px 8px;
+max-width: 100%;
+border-bottom: 1px solid  #E5E5E5;
+}
+.new_text_area{
   text-align:center;
-  display: block;
   height: auto;
-  margin: 8px 8px 8px 8px;
+  margin: 2px 2px 5px 2px;
   max-width: 100%;
-  border: 10px solid  #E5E5E5;
+}
+.div.field, div.actions {
+    margin: 0px 5px 2px 0px;
+    float: right;
 }

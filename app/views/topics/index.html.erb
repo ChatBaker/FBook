@@ -1,3 +1,4 @@
+<%= render 'form' %>
 <div class="container">
  <div  class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
   <p id="notice"><%= notice %></p>
@@ -6,7 +7,7 @@
       <p class=article_content><%= topic.content %></p>
       <p class=article_image><%=  image_tag topic.image_url %></p>
       <section class=edit_destroy_glyphicon>
-       <tb><%= link_to '', edit_topic_path(topic), class: 'glyphicon glyphicon-pencil'  %></tb>
+       <tb><%= link_to '', edit_topic_path(topic), class: 'glyphicon glyphicon-edit'  %></tb>
        <tb><%= link_to '', topic, method: :delete, data: { confirm: '本当にいいですか？'}, class: 'glyphicon glyphicon-trash' %></tb>
      </section>
     </div>

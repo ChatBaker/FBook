@@ -28,3 +28,19 @@
 .navbar-default .navbar-nav>li>a {
     color: white;
 }
+.article_content{
+  text-align:left;
+  display: block;
+  height: auto;
+  margin: 8px 15px 8px 15px;
+  max-width: 100%;
+}
+
+.article_image{
+  text-align:center;
+  display: block;
+  height: auto;
+  margin: 8px 8px 8px 8px;
+  max-width: 100%;
+  border: 10px solid  #E5E5E5;
+}
