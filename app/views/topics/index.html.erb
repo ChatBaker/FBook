@@ -1,7 +1,7 @@
 <div class="container">
  <div  class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
   <p id="notice"><%= notice %></p>
-   <% @topics.each do |topic| %>
+   <% @topics.reverse_order.each do |topic| %>
     <div id=main_article class="row">
       <p class=article_content><%= topic.content %></p>
       <p class=article_image><%=  image_tag topic.image_url %></p>
