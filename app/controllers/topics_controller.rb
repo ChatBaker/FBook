@@ -6,7 +6,6 @@ class TopicsController < ApplicationController
   # GET /topics.json
   def index
     @topics = Topic.all
-    binding.pry
     @topic = Topic.new
   end
 
