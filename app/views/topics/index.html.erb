@@ -4,6 +4,7 @@
   <p id="notice"><%= notice %></p>
    <% @topics.reverse_order.each do |topic| %>
     <div id=main_article class="row">
+       <p><%= topic.created_at.strftime('%Y年%m月%d日%H時')%> に投稿されました</p>
       <p class=article_content><%= topic.content %></p>
       <p class=article_image><%=  image_tag topic.image_url %></p>
       <section class=edit_destroy_glyphicon>
