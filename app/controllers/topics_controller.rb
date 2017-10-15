@@ -30,6 +30,7 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     respond_to do |format|
       if @topic.save
+         NoticeMailer.sendmail_blog(@topic).deliver
         format.html { redirect_to @topic, notice: '投稿完了' }
         format.json { render :show, status: :created, location: @topic }
       else
