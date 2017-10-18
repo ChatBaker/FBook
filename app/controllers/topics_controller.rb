@@ -5,8 +5,9 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.all.includes(:user)
     @topic = Topic.new
+
   end
 
   # GET /topics/1
