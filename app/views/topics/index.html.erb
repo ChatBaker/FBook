@@ -9,10 +9,20 @@
       <p class=article_content><%= topic.content %></p>
       <p class=article_image><%=  image_tag topic.image_url %></p>
       <section class=edit_destroy_glyphicon>
-       <tb><%= link_to '', edit_topic_path(topic), class: 'glyphicon glyphicon-edit'  %></tb>
-       <tb><%= link_to '', topic, method: :delete, data: { confirm: '本当にいいですか？'}, class: 'glyphicon glyphicon-trash' %></tb>
-     </section>
+        <% if current_user.id == topic.user_id %>
+          <%= link_to '編集', edit_topic_path(topic) %>
+        <% end %>
+        <%= link_to '戻る', topics_path %>
+      </section>
+
+             <p>コメント一覧</p>
+             <div id="comments_area">
+              <%= render partial: 'comments/index', locals: { comments: topic.comments, topic: topic } %>
+             </div>
+             <% @comment.topic_id = topic.id %>
+             <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
     </div>
+
    <% end %>
  </div>
 </div>

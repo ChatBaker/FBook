@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.all.includes(:user)
     @topic = Topic.new
-
+    @comment = @topic.comments.build
   end
 
   # GET /topics/1

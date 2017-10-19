@@ -28,11 +28,12 @@
         <li><a href="#">マイページ</a></li>
         <li><%= link_to 'ニュースフィード', topics_path %></li>
         <li><a href="#">お知らせ</a></li>
-        <li><a href="#">友達</a></li>
+        <li><%= link_to '友達', users_path if user_signed_in? %></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to "投稿を作成",new_topic_path%></li>
+              <li><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
               <li role="separator" class="divider"></li>
               <% if user_signed_in? %>
               <li><%= link_to 'アカウント', edit_user_registration_path %></li>
