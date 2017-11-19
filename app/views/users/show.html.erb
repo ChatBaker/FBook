@@ -1,0 +1,25 @@
+<div class="container">
+ <div class="col-md-5">
+  <div class="container_profile">
+   <div class="container_profile_image">
+     <%= profile_img(@user) %>
+   </div>
+   <div class="container_profile_other">
+   <h3>名前</h3>
+   <%= @user.name %>
+   <h4>e:mail</h4>
+   <%= @user.email %>
+  </div>
+</div>
+</div>
+<div class="container_follower_and_following">
+  <div class="row">
+    <div class="col-md-5">
+      <h3>Follower</h3>
+      <%= render partial:'followed_users_form' %>
+      <h3>Following</h3>
+      <%= render partial:'followers_form' %>
+   </div>
+ </div>
+</div>
+</div>

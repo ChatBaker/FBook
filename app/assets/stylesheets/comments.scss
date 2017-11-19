@@ -7,14 +7,32 @@ ul{
 
 .child li {
   padding-top: 13px;
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 5px dotted #ccc;
   list-style-type: none;
 }
 
-.right {
-text-align: right;
-}
 
 .left {
 text-align: left;
+}
+
+#comments_area{
+  background-color: #F6F7F9;
+
+}
+
+.each_comment{
+  border-bottom: 5px ;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 10px;
+}
+.each_comment_created_at{
+  color: #9194A1;
+}
+.edit_delete_links{
+  float: right;
+}
+.col-lg-6{
+    padding: 15px 15px 0px 15px;
 }

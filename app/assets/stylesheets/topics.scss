@@ -4,14 +4,19 @@
 // 以下、index.html.erb
 #main_article{
   border-style: solid;
-  border-width: 1px;
   border-color: #DDDFE2;
   background-color: white;
+  list-style: none;
 }
 .edit_destroy_glyphicon{
   float: right;
   margin-right: 2px;
 }
+.each_topic_created_at{
+  color: #9194A1;
+  font-size:85%;
+}
+
 // 以下、new.html.erb
 #new_article{
   border-style: solid;
@@ -20,8 +25,17 @@
   background-color: white;
 }
 .image_uploader{
-  float: right;
-  margin: 2px 5px 0px 0px;
+  float: left;
+  margin: 2px 5px 0px 10px;
+}
+
+.article_image{
+  text-align:center;
+  display: block;
+  height: auto;
+  margin: 8px 8px 8px 8px;
+  max-width: 100%;
+  border: 1px solid  #E5E5E5;
 }
 .new_content{
 text-align:center;

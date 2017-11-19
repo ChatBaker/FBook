@@ -4,7 +4,6 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:relationship][:followed_id])
-      binding.pry
     current_user.follow!(@user)
     respond_with @users
   end

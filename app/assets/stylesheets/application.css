@@ -15,6 +15,13 @@
 *= require_tree .
 *= require_self
  */
+
+ .right {
+ text-align: right;
+ float: right;
+ margin-right: 10px;
+ margin-top: 8px;
+ }
  #header{
    background-color: #4267B2;
    border-bottom: solid 1px;
@@ -36,11 +43,47 @@
   max-width: 100%;
 }
 
-.article_image{
-  text-align:center;
-  display: block;
-  height: auto;
-  margin: 8px 8px 8px 8px;
-  max-width: 100%;
-  border: 10px solid  #E5E5E5;
+ul{
+  list-style:none;
+}
+.form-control{
+  border-radius: 10px 10px 10px 10px;
+}
+.comments_entirely_area{
+  background-color: #F6F7F9;
+  border-top: solid;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #E1E2E3;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 50px;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin: 0;
+  }
+.bottom-text{
+  color: #415B96;
+  position: absolute;
+  bottom: 0;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.left_list{
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  width: 400px;
+  height: 50px;
 }

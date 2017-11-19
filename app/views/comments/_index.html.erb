@@ -1,16 +1,27 @@
+<p>コメント一覧</p>
 <ul>
-  <% comments.each do |comment| %>
-    <% unless comment.id.nil? %>
-      <li>
-        <p class="left"><%= comment.user.name %>さんがコメントしました。</p>
-        <p class="left"><%= comment.content %></p>
-        <% if current_user.id == comment.user.id %>
-          <p class="right">
-            <%= link_to '編集', edit_topic_comment_path(topic, comment), class: "fa fa-pencil-square-o fa-lg" %>
-            <%= link_to '削除', topic_comment_path(topic, comment), class: "fa fa-trash-o fa-lg", method: :delete, remote: true, data: { confirm: '本当に削除していいですか？' } %>
-          </p>
-        <% end %>
-      </li>
-    <% end %>
+ <% comments.each do |comment| %>
+
+<div class = "row">
+
+  <% unless comment.id.nil? %>
+   <li class="each_comment">
+    <div class="left"><%= comment.user.name %>さん         <%= comment.content %></div>
+    <% if current_user.id == comment.user.id %>
+    <div class="edit_delete_links">
+      <%= link_to '編集', edit_topic_comment_path(topic, comment) %>
+      <%= link_to '削除', topic_comment_path(topic, comment), method: :delete, remote: true, data: { confirm: '本当に削除していいですか？' } %>
+    </div>
+     <% end %>
+    <div class="each_comment_created_at">
+      <time datetime="<%= comment.created_at %>">
+      <%= time_ago_in_words(comment.created_at)+"前" %>
+      </time>
+    </div>
+   </li>
+   <% end %>
+
+</div>
+
   <% end %>
 </ul>

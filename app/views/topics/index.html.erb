@@ -1,28 +1,46 @@
+<div class="col-md-offset-4 col-md-6 col-sm-offset-4 col-sm-6">
 <p id="notice"><%= notice %></p>
+</div>
 <%= render 'form' %>
-<div class="container">
- <div  class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+
+ <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
    <% @topics.reverse_order.each do |topic| %>
     <div id=main_article class="row">
-      <%= image_tag(topic.user.image_url) %><%= topic.user.name %>
-       <p><%= topic.created_at.strftime('%Y年%m月%d日%H時')%> に投稿</p>
-      <p class=article_content><%= topic.content %></p>
-      <p class=article_image><%=  image_tag topic.image_url %></p>
-      <section class=edit_destroy_glyphicon>
-        <% if current_user.id == topic.user_id %>
-          <%= link_to '編集', edit_topic_path(topic) %>
-        <% end %>
-        <%= link_to '戻る', topics_path %>
-      </section>
+    　<%= image_tag(topic.user.image_url)%>
+      <%= topic.user.name %>
+      <% if current_user.id == topic.user_id %>
+      <div class="right">
+       <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+         <ul class="dropdown-menu">
+          <p><%= link_to '編集', edit_topic_path(topic) %></P>
+          <p><%= link_to '削除', topic_path(topic), method: :delete, data: { confirm: '本当に削除していいですか？' } %></p>
+         </ul><!-- /.dropdown-menu -->
+      </li><!-- /.dropdown -->
+      </div><!-- /.right -->
+      <% end %>
+      <div class="each_topic_created_at">
+       <%= time_ago_in_words(topic.created_at)+"前に投稿" %>
+      </div><!--/each_topic_created_at -->
+       <p class=article_content><%= topic.content %></p>
+       <% unless topic.image.blank? %>
+       <p class=article_image><%=image_tag topic.image_url %></p>
+       <% end %>
+      <br>
+      <div class="comments_entirely_area">
 
-             <p>コメント一覧</p>
-             <div id="comments_area">
-              <%= render partial: 'comments/index', locals: { comments: topic.comments, topic: topic } %>
-             </div>
-             <% @comment.topic_id = topic.id %>
-             <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
+        <div class = "row">
+
+       <% @comment.topic_id = topic.id %>
+       <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
+
+     </div>
+
+       <div class="comments_area_<%= topic.id%>">
+
+       <%= render partial: 'comments/index', locals: { comments: topic.comments, topic: topic } %>
+      </div><!-- /comments_area_<%= topic.id%>-->
+      </div><!-- /comments_entirely_area -->
     </div>
-
    <% end %>
  </div>
-</div>

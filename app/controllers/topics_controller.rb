@@ -13,6 +13,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+
   end
 
   # GET /topics/new
@@ -29,16 +30,21 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
+
+   if @topic.content.present? || @topic.image.present?
     respond_to do |format|
       if @topic.save
          NoticeMailer.sendmail_topic(@topic).deliver
         format.html { redirect_to @topic, notice: '投稿完了' }
-        format.json { render :show, status: :created, location: @topic }
+        # format.json { render :show, status: :created, location: @topic }
       else
-        format.html { render :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
+        format.html { render :edit }
+        # format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
+   else
+    redirect_to topics_path, notice:'空の投稿はできません'
+   end
   end
 
   # PATCH/PUT /topics/1

@@ -7,49 +7,71 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+ <nav class="navbar navbar-fixed-top" role="navigation">
   <nav id=header class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <ul class="nav navbar-nav navbar-left">
-       <li><%=link_to'トップ',root_path %></li>
-      </ul>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
+  <ul class="nav navbar-nav navbar-left">
+   <li><%=link_to'トップ',root_path %></li>
+   </ul><!-- /.nav navbar-nav navbar-left -->
+   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+   </button>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">マイページ</a></li>
+     <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'マイアカウント', edit_user_registration_path %></li>
         <li><%= link_to 'ニュースフィード', topics_path %></li>
-        <li><a href="#">お知らせ</a></li>
-        <li><%= link_to '友達', users_path if user_signed_in? %></li>
+        <li><%= link_to "友達", users_path if user_signed_in? %></li>     　　
+  　　　 <% if user_signed_in? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メッセージ <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="width: 402px;height: 512px;">
+            <table class="table table-hover">
+             <thead>
+              <p>メッセージ一覧</p>
+             </thead>
+               <tbody>
+                <% @conversations.each do |conversation| %>
+                  <% if conversation.target_user(current_user).present?%>
+                  <div class="left_list" >
+                    <%= link_to profile_img(conversation.target_user(current_user)),conversation_messages_path(conversation)%>
+                    <%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation)%>
+                    <% if conversation.target_message(current_user).present? %>
+                     <%= link_to conversation.target_message(current_user).last.body,conversation_messages_path(conversation)%>
+                    <% end %>
+                  </div>
+                  <%end %>
+                 <% end %>
+               </tbody>
+            </table>
+            <div class="bottom-text">
+              <li><%= link_to "メッセージを全部みる", conversations_path%></li>
+            </div>
+            </ul>
+          </li>
+        <% end %>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "投稿を作成",new_topic_path%></li>
-              <li><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
-              <li role="separator" class="divider"></li>
-              <% if user_signed_in? %>
-              <li><%= link_to 'アカウント', edit_user_registration_path %></li>
-               <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-              <% else %>
-               <li><%= link_to 'ログイン', new_user_session_path  %></li>
-               <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-              <% end %>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+         <li><%= link_to "投稿を作成",topics_path%></li>
+         <% if user_signed_in? %>
+         <li><%= link_to "友達", users_path %></li>
+         <li><%= link_to 'ユーザー一覧', users_path %></li>
+         <li role="separator" class="divider"></li>
+         <li><%= link_to 'マイアカウント', edit_user_registration_path %></li>
+         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+         <% else %>
+         <li><%= link_to 'ログイン', new_user_session_path  %></li>
+         <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+         <% end %>
+        </ul><!-- /.dropdown-menu -->
+        </li><!-- /.dropdown -->
+     </ul><!-- /.nav navbar-nav navbar-right -->
+     </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+   </nav>
+ </nav>
 <%= yield %>
-
 </body>
 </html>
