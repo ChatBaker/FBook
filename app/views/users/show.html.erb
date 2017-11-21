@@ -1,25 +1,67 @@
 <div class="container">
- <div class="col-md-5">
-  <div class="container_profile">
-   <div class="container_profile_image">
-     <%= profile_img(@user) %>
-   </div>
-   <div class="container_profile_other">
-   <h3>名前</h3>
-   <%= @user.name %>
-   <h4>e:mail</h4>
-   <%= @user.email %>
+  <div id="user_show_header">
+  <div class="col-md-offset-2 col-md-5">
+    <div class="col-md-3">
+     <div class="container_profile_image"><%= profile_img(@user) %></div>
+    </div><!-- /.col-md-3 -->
+    <div class=" col-md-4">
+      <div class="container_profile_other">
+        <h3>名前</h3>
+        <%= @user.name %>
+        <h4>e:mail</h4>
+        <%= @user.email %>
+        <%=link_to "アカウント編集",edit_user_registration_path%>
+      </div><!-- /.container_profile_other -->
+    </div><!-- /.col-md-3 -->
+  </div><!-- /.col-md-offset-3 col-md-3-->
+  <div id="followed_followed" class="col-md-5">
+    <div class="col-md-offset-5 col-md-7">
+    <div class="container_follower_and_following">
+        <h3>Follower</h3>
+        <%= render partial:'followed_users_form' %>
+        <h3>Following</h3>
+        <%= render partial:'followers_form' %>
+    </div><!-- /col-md-offset-2 col-md-10 -->
+    </div><!-- /.container_follower_and_following -->
+  </div><!-- /#col-md-3 -->
+</div>
+ <div id="own_topics">
+  <%= render 'topics/form' %>
+  <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+    <% @own_topics.each do |topic| %>
+      <div id="main_article" class="row">
+        <%= image_tag(topic.user.image_url)%>
+        <%= topic.user.name %>
+        <% if current_user.id == topic.user_id %>
+          <div class="right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <p><%= link_to '編集', edit_topic_path(topic) %></P>
+                <p><%= link_to '削除', topic_path(topic), method: :delete, data: { confirm: '本当に削除していいですか？' } %></p>
+              </ul><!-- /.dropdown-menu -->
+            </li><!-- /.dropdown -->
+          </div><!-- /.right -->
+         <% end %>
+         <div class="each_topic_created_at">
+           <%= time_ago_in_words(topic.created_at)+"前に投稿" %>
+         </div><!--/each_topic_created_at -->
+         <p class=article_content><%= topic.content %></p>
+         <% unless topic.image.blank? %>
+         <p class=article_image><%=image_tag topic.image_url %></p>
+        <% end %>
+      <br>
+        <div class="comments_entirely_area">
+          <div class = "row">
+            <% @comment.topic_id = topic.id %>
+            <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
+          </div>
+          <div class="comments_area_<%= topic.id%>">
+          <%= render partial: 'comments/index', locals: { comments: topic.comments, topic: topic } %>
+          </div><!-- /comments_area_<%= topic.id%>-->
+        </div><!-- /comments_entirely_area -->
+      </div>
+    <% end %>
   </div>
 </div>
-</div>
-<div class="container_follower_and_following">
-  <div class="row">
-    <div class="col-md-5">
-      <h3>Follower</h3>
-      <%= render partial:'followed_users_form' %>
-      <h3>Following</h3>
-      <%= render partial:'followers_form' %>
-   </div>
- </div>
-</div>
-</div>
+</div><!-- /.container -->

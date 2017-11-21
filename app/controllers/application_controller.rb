@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
     # @conversations = Conversation.where(sender_id == curennt_user.i)
     @conversations = Conversation.where("(sender_id = ?) OR (recipient_id = ?)", current_user.id, current_user.id)
-  end
+    end
   end
 
   protected

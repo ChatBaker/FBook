@@ -1,20 +1,20 @@
-
-    <div class="col-md-offset-3 col-md-6 col-sm-2 col-xs-3 ">
-     <h2>ユーザー</h2>
+<div class="container">
+  <div class="row">
+  <div class="col-md-offset-3 col-md-6 col-sm-2 col-xs-3 ">
+    <h2>ユーザー</h2>
       <% @users.each do |user| %>
-
-      <div class="user_index">
-        <div class"left">
-        <% if user.id != current_user.id %>
-          <%= profile_img(user) %>
+        <div class="user_index">
+          <% if user.id != current_user.id %>
+          <div class"left"><%= profile_img(user) %></div>
           <div class="item">
-          <p>NAME: <%= link_to user.name, user %></p>
-          <p>E-Mail: <%= user.email %></p>
-          <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+            <p>NAME: <%= link_to user.name, user %></p>
+            <p>E-Mail: <%= user.email %></p>
+            <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+            <%= render partial: 'follow_form', locals: { user: user } if signed_in?   %>
           </div>
-          <%= render partial: 'follow_form', locals: { user: user } if signed_in?   %>
-        <% end %>
+          <% end %>
+        </div>
       <% end %>
-      </div>
-      </div>
-      </div>
+  </div>
+  </div>
+</div>
